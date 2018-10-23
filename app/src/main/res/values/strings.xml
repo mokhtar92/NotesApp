@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Architecture Components</string>
+    <string name="str_add">Add</string>
+    <string name="str_cancel">Cancel</string>
+    <string name="str_enter_something">Enter Something…</string>
+    <string name="str_add_new_note">Add New Note</string>
+    <string name="str_empty_note_warning">Can\'t add empty note!</string>
+    <string name="oh_empty_list_start_adding_notes">Oh … empty list! \nstart adding notes.</string>
+    <string name="str_connection_error">Check internet connection!</string>
+    <string name="str_delete">Delete</string>
+</resources>

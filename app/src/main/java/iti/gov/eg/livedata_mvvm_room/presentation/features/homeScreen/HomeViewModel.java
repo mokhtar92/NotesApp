@@ -1,5 +1,6 @@
 package iti.gov.eg.livedata_mvvm_room.presentation.features.homeScreen;
 
+import android.annotation.SuppressLint;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
@@ -16,7 +17,7 @@ public class HomeViewModel extends ViewModel {
     private final Context context;
     private final Repository repository;
 
-    public HomeViewModel(Context context, Repository repository) {
+    HomeViewModel(Context context, Repository repository) {
         this.context = context;
         this.repository = repository;
     }
@@ -34,15 +35,19 @@ public class HomeViewModel extends ViewModel {
         return repository.insertNewNoteApi(note);
     }
 
-    public void backupAllNotesInDb(List<Note> notes){
+    public void backupAllNotesInDb(List<Note> notes) {
         repository.insertAllNotesToDb(notes);
     }
 
-    public void deleteNoteFromServer(int id){
+    public void deleteNoteFromServer(int id) {
         repository.deleteNoteApi(id);
     }
 
-    public void deleteNoteFromDb(int id){
+    public void deleteNoteFromDb(int id) {
         repository.deleteNoteDb(id);
+    }
+
+    public void insertNoteToDb(Note note) {
+        repository.insertNewNoteDb(note);
     }
 }

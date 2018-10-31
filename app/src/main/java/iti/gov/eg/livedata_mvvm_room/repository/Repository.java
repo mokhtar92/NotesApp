@@ -1,7 +1,6 @@
 package iti.gov.eg.livedata_mvvm_room.repository;
 
 import android.arch.lifecycle.LiveData;
-import android.content.Context;
 
 import java.util.List;
 
@@ -10,8 +9,6 @@ import javax.inject.Inject;
 import iti.gov.eg.livedata_mvvm_room.entities.Note;
 import iti.gov.eg.livedata_mvvm_room.repository.database.DatabaseHelper;
 import iti.gov.eg.livedata_mvvm_room.repository.server.NoteService;
-
-import static iti.gov.eg.livedata_mvvm_room.HelperClass.isConnectedToInternet;
 
 public class Repository implements IRepository {
 
@@ -32,7 +29,7 @@ public class Repository implements IRepository {
 
     @Override
     public LiveData<List<Note>> fetchAllNotesOffline() {
-        return database.queryAllNotes();
+        return database.queryAllNotesLatestFirst();
     }
 
     @Override
@@ -42,7 +39,7 @@ public class Repository implements IRepository {
 
     @Override
     public void insertNewNoteDb(Note note) {
-         database.insertNewNote(note);
+        database.insertNewNote(note);
     }
 
     @Override

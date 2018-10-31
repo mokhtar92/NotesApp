@@ -55,8 +55,8 @@ public class DatabaseHelper {
         });
     }
 
-    public LiveData<List<Note>> queryAllNotesOldestFirst() {
-        return Transformations.map(noteDao.getAllNotesOldestFirst(), new Function<List<DbNote>, List<Note>>() {
+    public LiveData<List<Note>> queryAllNotesLatestFirst() {
+        return Transformations.map(noteDao.getAllNotesLatestFirst(), new Function<List<DbNote>, List<Note>>() {
             @Override
             public List<Note> apply(List<DbNote> input) {
                 return mapToNoteList(input);

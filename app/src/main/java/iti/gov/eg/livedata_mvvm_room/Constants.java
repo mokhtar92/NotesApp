@@ -12,7 +12,7 @@ public class Constants {
 
     public static final String STORED_DATE_FORMAT_PATTERN = "yyyy-MM-dd HH:mm:ss";
     public static final String DISPLAYED_DATE_FORMAT_PATTERN = "d MMM yyyy\nh:mm a";
-    public static final String BASE_URL = "https://demo.androidhive.info/";
 
+    public static final String BASE_URL = "https://demo.androidhive.info/";
     public static final String ACCESS_TOKEN = "b727f107d99fa5c824a8bb9c575ea860";
 }

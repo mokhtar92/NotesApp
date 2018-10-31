@@ -11,7 +11,7 @@ import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
-import iti.gov.eg.livedata_mvvm_room.ViewModelProviderFactory;
+import iti.gov.eg.livedata_mvvm_room.presentation.components.ViewModelProviderFactory;
 import iti.gov.eg.livedata_mvvm_room.entities.Note;
 import iti.gov.eg.livedata_mvvm_room.repository.Repository;
 

@@ -44,7 +44,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull NoteViewHolder holder, int position) {
-        final Note note = noteList.get(position);
+        Note note = noteList.get(position);
         Glide.with(context)
                 .load(note.getImageUrl())
                 .apply(new RequestOptions()
@@ -53,12 +53,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
                 .into(holder.noteImage);
         holder.noteTextView.setText(note.getNote());
         holder.noteDateTextView.setText(formatDateTimeFromServer(note.getTimestamp()));
-        holder.deleteNoteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clickListener.itemClicked(note.getId());
-            }
-        });
     }
 
     @Override
@@ -66,7 +60,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         return noteList.size();
     }
 
-    static class NoteViewHolder extends RecyclerView.ViewHolder {
+    class NoteViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.note_image_view)
         ImageView noteImage;
 
@@ -82,6 +76,13 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         NoteViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
+            deleteNoteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    clickListener.itemClicked(getAdapterPosition(), noteList.get(getAdapterPosition()).getId());
+                }
+            });
         }
     }
 
@@ -90,7 +91,17 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder
         notifyDataSetChanged();
     }
 
+    public void insertNoteAtFirstPosition(Note note) {
+        noteList.add(0, note);
+        notifyItemInserted(0);
+    }
+
+    public void removeNoteAtPosition(int position) {
+        noteList.remove(position);
+        notifyItemRemoved(position);
+    }
+
     interface NoteItemClickListener {
-        void itemClicked(int noteId);
+        void itemClicked(int position, int noteId);
     }
 }

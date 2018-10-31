@@ -25,8 +25,8 @@ public interface NoteDao {
     @Query("SELECT * FROM " + TABLE_NAME)
     LiveData<List<DbNote>> getAllNotes();
 
-    @Query("SELECT * FROM " + TABLE_NAME + " ORDER BY " + COLUMN_TIMESTAMP + " ASC")
-    LiveData<List<DbNote>> getAllNotesOldestFirst();
+    @Query("SELECT * FROM " + TABLE_NAME + " ORDER BY " + COLUMN_ID + " DESC")
+    LiveData<List<DbNote>> getAllNotesLatestFirst();
 
     @Query("SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + " = :local_id")
     LiveData<DbNote> getSingleNote(int local_id);

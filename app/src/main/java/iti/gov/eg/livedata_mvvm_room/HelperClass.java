@@ -26,9 +26,9 @@ public class HelperClass {
 
     public static String formatDateTimeFromServer(String dateStr) {
         try {
-            SimpleDateFormat fmt = new SimpleDateFormat(STORED_DATE_FORMAT_PATTERN, Locale.getDefault());
+            SimpleDateFormat fmt = new SimpleDateFormat(STORED_DATE_FORMAT_PATTERN, Locale.CANADA);
             Date date = fmt.parse(dateStr);
-            SimpleDateFormat fmtOut = new SimpleDateFormat(DISPLAYED_DATE_FORMAT_PATTERN, Locale.getDefault());
+            SimpleDateFormat fmtOut = new SimpleDateFormat(DISPLAYED_DATE_FORMAT_PATTERN, Locale.CANADA);
             return fmtOut.format(date);
         } catch (ParseException ignored) {
 

@@ -90,7 +90,6 @@ public class HomeActivity extends AppCompatActivity implements NoteAdapter.NoteI
             @Override
             public void onChanged(@Nullable List<Note> notes) {
                 adapter.setNoteList(notes);
-                viewModel.backupAllNotesInDb(notes);
             }
         });
     }
@@ -111,35 +110,31 @@ public class HomeActivity extends AppCompatActivity implements NoteAdapter.NoteI
 
                         } else {
                             Note note = new Note(noteContent);
-                            viewModel.insertNote(note);
-                            new Handler().postDelayed(new Runnable() {
+                            viewModel.insertNote(note).observe(HomeActivity.this, new Observer<Note>() {
                                 @Override
-                                public void run() {
-                                    refreshDataSet();
-                                    editText.setText("");
+                                public void onChanged(@Nullable Note successfulNote) {
+                                    viewModel.insertNoteToDb(successfulNote);
+                                    adapter.insertNoteAtFirstPosition(successfulNote);
+                                    recyclerView.scrollToPosition(0);
                                 }
-                            }, 150);
+                            });
+                            editText.setText("");
                         }
                     }
                 }).show();
     }
 
     @Override
-    public void itemClicked(final int noteId) {
+    public void itemClicked(final int position, final int noteId) {
         if (isConnectedToInternet(this)) {
             getDialogBuilder(this)
-                    .setTitle("Do you want to delete this note?")
+                    .setTitle(R.string.str_delete_note_confirmation)
                     .setPositiveButton(R.string.str_delete, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             // delete note
                             viewModel.deleteNoteFromServer(noteId);
                             viewModel.deleteNoteFromDb(noteId);
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    refreshDataSet();
-                                }
-                            }, 150);
+                            adapter.removeNoteAtPosition(position);
                         }
                     }).show();
 

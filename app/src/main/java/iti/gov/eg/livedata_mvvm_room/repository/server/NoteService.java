@@ -68,7 +68,7 @@ public class NoteService {
         noteService.updateNote(noteId, note).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                Timber.e("Successful note updating");
+                Timber.d("Successful note updating");
             }
 
             @Override
